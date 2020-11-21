@@ -1,7 +1,6 @@
 
 from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
-import pandas as pd
 
 
 def grid_search_cv_knn(nn_start, nn_end, X, y, cv_value):
@@ -25,4 +24,4 @@ def grid_search_cv_knn(nn_start, nn_end, X, y, cv_value):
     #df = pd.DataFrame(grid.cv_results_)
     # summarize results
     #print(df[['param_n_neighbors', 'param_p', 'param_weights', 'mean_test_score', 'mean_train_score']])
-    return grid, param_grid, cv_value
+    return grid, grid.best_params_, cv_value
