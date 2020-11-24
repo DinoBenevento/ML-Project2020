@@ -13,10 +13,10 @@ def svm_grid_search_cv(X, y, cv_value):
     SVC = svm.SVC()
     grid = GridSearchCV(SVC, param_grid, cv=cv_value, scoring='accuracy', return_train_score=True)
     grid.fit(X, y)
-    print("Best test accuracy: {:.2%} using {}".format(grid.best_score_, grid.best_params_))
     means_test = grid.cv_results_['mean_test_score']
     means_train = grid.cv_results_['mean_train_score']
     params = grid.cv_results_['params']
     for mean_train, mean_test, param in zip(means_train, means_test, params):
         print("Training accuracy: {:.2%}, Test accuracy: {:.2%} with: {}".format(mean_train, mean_test, param))
+    print("Best test accuracy: {:.2%} using {}".format(grid.best_score_, grid.best_params_))
     return grid.cv_results_
