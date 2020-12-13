@@ -47,14 +47,9 @@ heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
 #plt.show()
 
 X_train_scaled = scaling_method(X, "MinMax")
-model = KerasClassifier(build_fn=set_batch_epochs_NN_binary_(), verbose=0)
 
-batch_size = [10, 20, 40, 60, 80, 100]
-epochs = [10, 50, 100]
-param_grid = dict(batch_size=batch_size, epochs=epochs)
-grid = GridSearchCV(model, param_grid, cv=3, scoring='accuracy', return_train_score=True)
-grid.fit(X, y)
-print_result_gridsearch(grid)
+knn_grid_search_cv(1,31, X, y, 5)
+
 
 
 

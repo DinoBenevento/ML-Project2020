@@ -30,6 +30,6 @@ model = KerasClassifier(build_fn=create_model, verbose=0)
 batch_size = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 epochs = [10, 20, 30, 50, 60, 70, 80, 90, 100]
 param_grid = dict(batch_size=batch_size, epochs=epochs)
-grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=3, return_train_score=True, scoring='accuracy')
+grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=10, return_train_score=True, scoring='accuracy')
 grid.fit(X, y)
 print_result_gridsearch(grid)
