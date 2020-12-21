@@ -10,6 +10,8 @@ from sklearn.model_selection import GridSearchCV
 from src.NNBinaryClassification import set_batch_epochs_NN_binary_
 from keras.wrappers.scikit_learn import KerasClassifier
 from src.PrintAndPlotResult import print_result_gridsearch
+from sklearn.model_selection import LeaveOneOut
+
 
 
 from src.Scaling import scaling_method
@@ -42,13 +44,22 @@ plt.figure(figsize=(16, 6))
 
 monk1_dataframe = pd.read_csv("../data/monks-1.train", delimiter=" ")
 
-heatmap = sns.heatmap(monk1_dataframe.corr(), vmin=-1, vmax=1,annot=True)
-heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+#heatmap = sns.heatmap(monk1_dataframe.corr(), vmin=-1, vmax=1,annot=True)
+#heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
 #plt.show()
 
 X_train_scaled = scaling_method(X, "MinMax")
+best_scores = []
+best_params = []
+cvs = []
+plt.scatter(X, X)
+plt.show()
+plt.scatter(X_train_scaled, X_train_scaled)
+plt.show()
 
-knn_grid_search_cv(1,31, X, y, 5)
+
+cv = LeaveOneOut()
+best_score_, best_params_, cv = knn_grid_search_cv(1, 31, X_train_scaled, y, cv)
 
 
 

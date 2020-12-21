@@ -13,13 +13,12 @@ def knn_grid_search_cv(nn_start, nn_end, X, y, cv_value):
     ps = [1, 2]
     metrics = ['euclidean', 'manhattan', 'chebyshev', 'minkowski']
 
-    cv_list = []
-
     param_grid = dict(n_neighbors=k_n, weights=weight_options, p=ps, algorithm=algorithms, metric=metrics)
     knn = KNeighborsClassifier()
     grid = GridSearchCV(knn, param_grid, cv=cv_value, scoring='accuracy', return_train_score=True)
     grid.fit(X, y)
-    print_result_gridsearch(grid)
+    best_score, best_params = print_result_gridsearch(grid)
+    return best_score, best_params, cv_value
 
 
 
